@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Main {
   public static void main(String[] args) {
-    int change = 100;
+    int change = 72;
     int[] coins = {1, 5, 10, 25};
     System.out.println("Number of possibilities for " + change + " cents: " + getChange(change, coins, 0, new ArrayList<>()));
   }
@@ -16,7 +16,10 @@ public class Main {
       return 0;
     }
     
-    int thisCoin = getChange(amount - coins[index], coins, index, new ArrayList<>(list){{add(coins[index]);}});
+    ArrayList<Integer> newList = new ArrayList<>(list);
+    newList.add(coins[index]);
+    int thisCoin = getChange(amount - coins[index], coins, index, newList);
+
     return thisCoin + getChange(amount, coins, index + 1, list);
   }
 }
