@@ -2,26 +2,21 @@ import java.util.*;
 
 public class Main {
   public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
-    System.out.print("Enter the amount of change: ");
-    int amount = sc.nextInt();
+    int change = 100;
     int[] coins = {1, 5, 10, 25};
-    System.out.println("Number of possibilities: " + getChange(amount, coins, 0, new ArrayList<>()));
+    System.out.println("Number of possibilities for " + change + " cents: " + getChange(change, coins, 0, new ArrayList<>()));
   }
   
-  public static int getChange(int amount, int[] coins, int currentIndex, ArrayList<Integer> currentList) {
+  public static int getChange(int amount, int[] coins, int index, ArrayList<Integer> list) {
     if (amount == 0) {
-      System.out.println(currentList);
+      System.out.println(list);
       return 1;
     }
-
-    if (amount < 0 || currentIndex >= coins.length) {
+    if (amount < 0 || index >= coins.length) {
       return 0;
     }
     
-    int current = getChange(amount - coins[currentIndex], coins, currentIndex, new ArrayList<>(currentList){{add(coins[currentIndex]);}});
-    int next = getChange(amount, coins, currentIndex + 1, currentList);
-
-    return current + next;
+    int thisCoin = getChange(amount - coins[index], coins, index, new ArrayList<>(list){{add(coins[index]);}});
+    return thisCoin + getChange(amount, coins, index + 1, list);
   }
 }
