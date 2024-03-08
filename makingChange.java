@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Main {
+public class makingChange {
   public static void main(String[] args) {
     int change = 72;
     int[] coins = {1, 5, 10, 25};
@@ -18,8 +18,7 @@ public class Main {
     
     ArrayList<Integer> newList = new ArrayList<>(list);
     newList.add(coins[index]);
-    int thisCoin = getChange(amount - coins[index], coins, index, newList);
 
-    return thisCoin + getChange(amount, coins, index + 1, list);
+    return getChange(amount - coins[index], coins, index, newList) + getChange(amount, coins, index + 1, list);
   }
 }
